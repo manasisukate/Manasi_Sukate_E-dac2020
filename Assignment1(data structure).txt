@@ -1,0 +1,972 @@
+Que1:Array add and delete
+->
+import java.util.Scanner;
+
+public class SearchDeleteDemo {
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("How many elements you want :");
+        int n=sc.nextInt();
+        int arr[]=new int[n];
+        System.out.println("Enter the array elements :");
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        System.out.println("Enter number :");
+        int val=sc.nextInt();
+        int i;
+        for(i=0;i<n;i++)
+        {
+            if(val==arr[i])
+            {
+                break;
+            }
+        }
+        if(i==n)
+        {
+            System.out.println("Element not found!!!");
+        }
+        else
+        {
+            System.out.println("Element found at "+(i+1)+"th position");
+        }
+        System.out.println("Enter the number to delete :");
+        int no=sc.nextInt();
+        for(i=0;i<n;i++)
+        {
+            if(no==arr[i])
+            {
+                break;
+            }
+        }
+        for(int j=i;j<n-1;j++)
+        {
+            arr[j]=arr[j+1];
+        }
+        n--;
+        System.out.println("Array elements are");
+        for(i=0;i<n;i++)
+        {
+            System.out.println(arr[i]);
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------
+Que 2: Stack(push,pop and peek)
+->
+
+import java.util.Scanner;
+
+public class Stack {
+    static final int MAX=10;
+    private int top;
+    int stack[];
+    
+    Stack()
+    {
+        top=-1;
+        stack=new int[MAX];
+    }
+    
+    void push(int val) {
+        if(isFull())
+        {
+            System.out.println("Error: Stack is full");
+        }
+        else
+        {
+            top=top+1;
+            stack[top]=val;
+            System.out.println(val+" pushed into stack.");
+        }
+    }
+    
+    void pop() {
+        if(isEmpty())
+        {
+            System.out.println("Error: Stack is empty");
+        }
+        else
+        {
+            top=top-1;
+            System.out.println("popped from stack.");
+        }
+        
+    }
+    
+    boolean isEmpty()
+    {
+        if(top==-1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    boolean isFull()
+    {
+        if(top>=MAX-1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    
+    void display()
+    {
+        if(top>=0)
+        {
+            System.out.println("Stack elements :");
+            for(int i=0;i<=top;i++)
+            {
+                System.out.println(stack[i]);
+            }
+        }
+        else
+        {
+            System.out.println("Stack is empty.");
+        }
+    }
+
+    
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        Stack st=new Stack();
+        char ch;
+        int choice;
+        do
+        {                
+            System.out.println("1. Push\n2. Pop\n3. Display.");
+            System.out.print("Enter your choice :");
+            choice=sc.nextInt();
+
+            switch(choice)
+            {
+                case 1:
+                    System.out.println("Enter value to add :");
+                    int val=sc.nextInt();
+                    st.push(val);
+                    break;
+
+                case 2:
+                    st.pop();
+                    break;
+
+                case 3:
+                    st.display();
+                    break;
+            }
+            System.out.print("Do you want to continue(y/n) :");
+            ch=sc.next().charAt(0);
+        }while(ch=='y' || ch=='Y');
+        
+    }
+  
+}
+-------------------------------------------------------------------------------------------------------
+Que 3: Bracket (single and multiple)
+->
+
+import java.util.*;
+
+public class Bracket {
+    int top;
+    char stack[];
+    
+    Bracket()
+    {
+        top=-1;
+        stack=new char[20];
+    }
+    void push(char c)
+    {
+        top=top+1;
+        stack[top]=c;
+    }
+    void pop()
+    {
+        top=top-1;       
+    }
+    boolean isEmpty()
+    {
+        if(top==-1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    char peek() {    
+           return stack[top];
+    }
+    public static void main(String args[])
+    {
+        Bracket bt=new Bracket();
+        Scanner sc = new Scanner(System.in);  
+        System.out.print("Please enter the number of strings you want to enter: ");   
+        String string[]=new String[sc.nextInt()];
+        sc.nextLine(); 
+        for(int i=0;i<string.length;i++)
+        {
+            string[i]=sc.nextLine();
+        }
+        for(int i=0;i<string.length;i++)
+        {
+            for(char b: string[i].toCharArray())  //{{}}
+            {
+                switch(b)
+                {
+                    case '}':
+                        if(bt.isEmpty() || bt.peek()!='{')
+                        {
+                            System.out.println("Unbalanced");
+                            break;
+                        }
+                        else
+                        {
+                            bt.pop();
+                        }
+                        break;  
+                        
+                    case ']':
+                        if(bt.isEmpty() || bt.peek()!='[')
+                        {
+                            System.out.println("Unbalanced");
+                            break;
+                        }
+                        else
+                        {
+                            bt.pop();
+                        }
+                        break;  
+                        
+                        
+                     case ')':
+                        if(bt.isEmpty() || bt.peek()!='(')
+                        {
+                            System.out.println("Unbalanced");
+                            break;
+                        }
+                        else
+                        {
+                            bt.pop();
+                        }
+                        break;
+                        
+                    default:
+                        bt.push(b);
+                        
+                }
+            }
+            if(bt.isEmpty())
+            {
+                System.out.println("Balanced");
+            }
+            else
+            {
+                System.out.println("Unbalanced");
+            }
+        }
+    }
+  
+}
+-------------------------------------------------------------------------------------------
+Que 4: Queue(linear)
+->
+import java.util.Scanner;
+
+public class Queue {
+    static final int MAX=10;
+    int front,rear;
+    int queue[];
+    
+    Queue()
+    {
+        front=-1;
+        rear=-1;
+        queue=new int[MAX];
+    }
+    
+    void enqueue(int val) {
+        if(rear>=MAX-1)
+        {
+            System.out.println("Queue is full.");
+        }
+        else
+        {
+            rear=rear+1;
+            queue[rear]=val;
+            System.out.println(val+" is inserted into queue.");
+        }
+    }
+    
+    void dequeue() {
+        if(rear==front)
+        {
+            System.out.println("Queue is empty.");
+        }
+        else
+        {
+            front=front+1;
+            System.out.println(queue[front]+" is deleted from queue.");
+        }
+    }
+    
+    void display() {
+        if(rear==front)
+        {
+            System.out.println("Queue is empty.");
+        }
+        else
+        {
+            System.out.println("Queue elements :");
+            for(int i=front+1;i<=rear;i++)
+            {
+                System.out.println(queue[i]);
+            }
+        }
+    }
+    
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        Queue que=new Queue();
+        char ch;
+        int choice;
+        do
+        {                
+            System.out.println("1. Enqueue\n2. Dequeue\n3. Display.");
+            System.out.print("Enter your choice :");
+            choice=sc.nextInt();
+
+            switch(choice)
+            {
+                case 1:
+                    System.out.println("Enter value to add :");
+                    int val=sc.nextInt();
+                    que.enqueue(val);
+                    break;
+
+                case 2:
+                    que.dequeue();
+                    break;
+
+                case 3:
+                    que.display();
+                    break;
+            }
+            System.out.print("Do you want to continue(y/n) :");
+            ch=sc.next().charAt(0);
+        }while(ch=='y' || ch=='Y');
+        
+    }
+    
+}
+----------------------------------------------------------------------------------------------------------------------------------
+Que 5: Queue (Circular)
+->
+import java.util.Scanner;
+
+class lined
+{
+    public static void main(String args[]) 
+    {
+        Scanner obj1= new Scanner(System.in);
+         System.out.println("enter sizze of arry");
+        
+        int i=obj1.nextInt();
+        demo1 obj =new demo1(i);
+         System.out.println(obj1);
+        
+        obj.enqueue(10);
+        obj.enqueue(200);
+        obj.enqueue(13);
+        obj.enqueue(19);
+        obj.enqueue(109);
+        obj.enqueue(199);
+        obj.enqueue(2);
+        obj.enqueue(89);
+        obj.enqueue(87);
+        obj.enqueue(19);
+        
+        
+        
+    }
+}
+class demo1
+{
+    int rear=-1,front=0,size=0,max;
+    int arr[];
+    demo1(int i)
+    {
+        arr=new int[i];
+        this.max=i;
+        
+    }
+    void enqueue(int i)
+    {
+        if(size>=max)
+        {
+             System.out.println("queue is full");
+        }
+        else
+        {
+            this.rear=(rear+1)%max;
+            arr[rear]=rear;
+            size=size++;
+             System.out.println("element inserted " + arr[rear]);
+             size =++size;
+            
+        }
+        
+        
+    }
+    void dequeue()
+    {
+        if (size<=0)
+        {
+            System.out.println("queue is empty");
+        }
+        else
+        {
+            front=front%max;
+            System.out.println("element is removed" + arr[front]);
+            front=front++;
+        }
+    }
+    
+}
+
+---------------------------------------------------------------------------------------------------------------
+Que 6: Singly Linked list
+->
+
+package datastructure;
+import java.util.Scanner;
+
+class Node
+{
+    int data;
+    Node next;
+    
+    Node(int data)
+    {
+        this.data=data;
+        this.next=null;
+    }
+}
+class SinglyLinkesList
+{
+    Node head=null;
+    Node tail=null;
+    public void add(int val)
+    {
+        Node n=new Node(val);
+        if(head==null)
+        {
+            head=n;
+            tail=n;
+        }
+        else
+        {
+            tail.next=n;
+            tail=n;
+        }
+    }
+    
+    
+    public void insertBeg(int val)
+    {
+        Node n1=new Node(val);
+        if(head==null)
+        {
+           n1=head;
+        }
+        else
+        {
+            n1.next=head;
+            head=n1;
+        }
+    }
+    
+    public void insertEnd(int val)
+    {
+        Node n1=new Node(val);
+        if(head==null)
+        {
+           System.out.println("List is empty.");
+        }
+        else
+        {
+            tail.next=n1;
+        }
+    }
+    
+      public void insertMid(int pos,int val)
+    {
+        Node n1=new Node(val);
+        if(head==null)
+        {
+           System.out.println("List is empty.");
+        }
+        else
+        {
+            
+        }
+    }
+    
+
+public void display() {    
+          
+        Node current = head;    
+            
+        if(head == null) {    
+            System.out.println("List is empty");    
+            return;    
+        }    
+        System.out.println("Nodes of singly linked list: ");    
+        while(current != null) {               
+            System.out.print(current.data + " ");    
+            current = current.next;    
+        }    
+        System.out.println();    
+    }
+}
+public class LinkedList {
+    public static void main(String args[])
+    {
+        SinglyLinkesList list=new SinglyLinkesList();
+        list.add(1);
+        list.add(6);
+        list.add(8);
+        list.add(5);
+        list.add(3);
+        list.display();
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the element to insert at beginning :");
+        int n=sc.nextInt();
+        list.insertBeg(n);
+        list.display();
+        
+        System.out.println("Enter the element to insert at end :");
+        int m=sc.nextInt();
+        list.insertEnd(m);
+        list.display();
+        
+        
+        System.out.println("How many elements you want to add :");
+        int k=sc.nextInt();
+        int arr[]=new int[k];
+        System.out.println("Enter the values to insert :");
+        for(int i=0;i<k;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        for(int i=0;i<k;i++)
+        {
+            list.add(arr[i]);
+        }
+        System.out.println("Elements are added successfully");
+        for(int i=0;i<k;i++)
+        {
+            System.out.println(arr[i]);
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------
+Que 7: Doubly linked list
+->
+package datastructure;
+import java.util.Scanner;
+
+class Node1
+{
+    int data;
+    Node1 next;
+    Node1 prev;
+    
+    Node1(int data)
+    {
+        this.data=data;
+        this.next=null;
+        this.prev=null;
+    }
+}
+public class DoublyLinkedList {
+    
+    Node1 head;
+    int length;
+    
+    DoublyLinkedList()
+    {
+        head=null;
+        length=0;
+    }
+    
+    void insertBeg(int data)
+    {
+        Node1 newNode1=new Node1(data);
+        if(head==null)
+        {
+            head=newNode1;
+        }
+        else
+        {
+            newNode1.next=head;
+            head.prev=newNode1;
+            head=newNode1;
+        }
+        length++;
+    }
+    
+    
+    void insertEnd(int data)
+    {
+        Node1 newNode1=new Node1(data);
+        if(head==null)
+        {
+            head=newNode1;
+        }
+        else
+        {
+            Node1 n=head;
+            while(n.next!=null)
+            {
+                n=n.next;
+            }
+            n.next=newNode1;
+            newNode1=n;
+        }
+        length++;
+    }
+    
+     void insertMid(int pos,int data)
+    {
+        
+        if(pos==1)
+        {
+            insertBeg(data);
+        }
+        else if(pos>length)
+        {
+            insertEnd(data);
+        }
+        else
+        {
+            int val=1;
+            Node1 n=head;
+            while(n.next!=null)
+            {
+                val++;
+                if(pos==val)
+                {
+                    break;
+                }
+                else
+                {
+                    n=n.next;
+                } 
+            }
+            Node1 newNode1=new Node1(data); 
+            newNode1.prev=n;
+            newNode1.next=n.next;        
+            n.next.prev=newNode1;
+            n.next=newNode1;
+            
+        }
+    }
+    
+    void deleteBeg()
+    {
+        if(head==null)
+        {
+            System.out.println("List is empty");
+        }
+        else
+        {
+            head=head.next;
+            length--;
+        }
+        
+    }
+    
+    void deleteEnd()
+    {
+        if(head==null)
+        {
+            System.out.println("List is empty");
+        }
+        else
+        {
+            Node1 n=head;
+            while(n.next!=null)
+            {
+                n=n.next;
+            }
+            n.prev.next=null;
+            n.prev=null;
+            length--;
+        }
+    }
+    
+    void deleteMid(int pos)
+    {
+        if(head==null)
+        {
+            System.out.println("List is empty");
+        }
+        else
+        {
+ 
+            length--;
+        }
+    }
+    
+    
+    void display()
+    {
+        Node1 n=head;
+        while(n!=null)
+        {
+            System.out.println(n.data);
+            n=n.next;
+        }
+    }
+    
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        DoublyLinkedList dl=new DoublyLinkedList();
+        System.out.println("Insertion at beginning");
+        dl.insertBeg(1);
+        dl.insertBeg(2);
+        dl.display();
+        System.out.println("Insertion at end");
+        dl.insertEnd(5);
+        dl.display();
+        System.out.println("Insertion at middle");
+        dl.insertMid(3, 9);
+        dl.display();
+        System.out.println("Deletion at beginning");
+        dl.deleteBeg();
+        dl.display();
+        System.out.println("Deletion at end");
+        dl.deleteEnd();
+        dl.display();
+    }
+}
+-----------------------------------------------------------------------------------------------------------
+
+Q8. Stack using linked list
+->
+
+// stack -> top
+// queue -> rear , front
+// linked list -> data , next
+// doubly linked list -> data, prev, next
+// tree -> data ,left, right
+
+package datastructure1;
+class Node
+{
+    int data;
+    Node next; 
+    
+    Node(int data)
+    {
+        this.data=data;
+        this.next=null;
+    }
+}
+public class StackUsingLinkedList {
+    Node top=null;
+    
+    void push(int data)
+    {
+        Node node=new Node(data);
+        
+        if(top==null)
+        {
+            top=node;
+            System.out.println("push :"+top.data);
+        }
+        else
+        {
+            node.next=top;
+            top=node;
+            System.out.println("push :"+top.data);
+        }
+        
+    }
+    
+    void pop()
+    {
+        if(top==null)
+        {
+            System.out.println("Stack is empty");
+        }
+        else
+        {
+            System.out.println("pop :"+top.data);
+             top =top.next;
+        }
+    }
+    
+    void display() {
+       while(top!=null)
+       {
+           
+           System.out.println(top.data);
+           top=top.next;
+           
+       }
+    }
+    
+    public static void main(String args[])
+    {
+        StackUsingLinkedList st=new StackUsingLinkedList();
+        st.push(10);
+        st.push(20);
+        st.push(30);
+        st.push(40);
+        st.push(50);
+        st.pop();
+        st.pop();
+        st.display();
+    }
+
+    
+}
+------------------------------------------------------------------------------------------------------------------------
+Que 9: Queue using linked list
+->
+
+class Node {
+  int data;
+  Node next;
+}
+
+class QueueLinked {
+  Node first;
+  Node last;
+  int size;
+  
+  public Node getNewNode(int val) {
+    Node a = new Node();
+    a.data = val;
+    a.next = null;
+    return a;
+  }
+  
+  //Complexity: O(1)
+  public void insert(int val) {
+    if(last == null) {
+      first = last = getNewNode(val);
+      size++;
+      return;
+    }
+    size++;
+    last.next = getNewNode(val);
+    last = last.next;
+  }
+  
+  //Complexity: O(1)
+  public boolean ifEmpty() {
+    if(last == null) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  //Complexity: O(1)
+  public int remove() {
+    if(ifEmpty()) {
+      System.out.println("Queue is empty. Nothing to remove");
+      return Integer.MIN_VALUE;
+    }
+    size--;
+    int t = first.data;
+    first = first.next;
+    if(first == null) {
+      last = null;
+    }
+    return t;
+  }
+  
+  //Complexity: O(1)
+  public int getSize() {
+    return size;
+  }
+  
+  //Complexity: O(1)
+  public int getFront() {
+    if(ifEmpty()) {
+      System.out.println("Queue is Empty. Nothing at Front");
+      return Integer.MIN_VALUE;
+    }
+    return first.data;
+  }
+  
+  //Complexity: O(1)
+  public int getRear() {
+    if(ifEmpty()) {
+      System.out.println("Queue is Empty. Nothing at Rear");
+      return Integer.MIN_VALUE;
+    }
+    return last.data;
+  }
+}
+
+public class QueueLinkedListImplementation {
+
+  public static void main(String[] args) {
+    QueueLinked a = new QueueLinked();
+    a.insert(12);
+    a.insert(2);
+    a.insert(7);
+    a.insert(27);
+    a.insert(18);
+    a.insert(80);
+    
+    System.out.println("Size: " + a.getSize());
+    System.out.println("Front: " + a.getFront());
+    System.out.println("Rear: " + a.getRear());
+    
+    System.out.println("Removed Element: " + a.remove());
+    
+    System.out.println("Size: " + a.getSize());
+    System.out.println("Front: " + a.getFront());
+    System.out.println("Rear: " + a.getRear());
+    a.insert(81);
+    
+    System.out.println("Size: " + a.getSize());
+    System.out.println("Front: " + a.getFront());
+    System.out.println("Rear: " + a.getRear());
+    
+    System.out.println("Removed Element: " + a.remove());
+    System.out.println("Removed Element: " + a.remove());
+    System.out.println("Removed Element: " + a.remove());
+    System.out.println("Removed Element: " + a.remove());
+    System.out.println("Removed Element: " + a.remove());
+    System.out.println("Removed Element: " + a.remove());
+    System.out.println("Removed Element: " + a.remove());
+
+  }
+
+}
+
