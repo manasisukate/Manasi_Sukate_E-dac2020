@@ -1,0 +1,51 @@
+**************************Assignment 1************************
+use db3;
+
+create table member(member_id int(5),member_name varchar(30)
+,memeber_address varchar(50),acc_open_date date,membership_type 
+varchar(20),penalty_amount int(7),primary key(member_id));
+
+create table books(book_no int(6),book_name varchar(30),author_name
+varchar(30),cost int(7),category char(10),primary key(book_no));
+
+create table issue(lib_issue_id int(10),book_no int(6),
+member_id int(6),issue_date date,return_date date,
+foreign key(member_id) references Member(member_id),
+foreign key(book_no) references books(book_no));
+
+desc member;
+desc issue;
+desc books;
+
+alter table member drop column penalty_amount;
+
+insert into member values(1,"Richa Sharma","Pune",STR_TO_DATE('10-Dec-2005', '%d-%M-%Y'),"Lifetime");
+insert into member values(2,"Garima Sen","Pune",now(),"Annual");
+insert into member values(3,"Manasi Sukate","Ahmednagar",STR_TO_DATE('24-Mar-2017', '%d-%M-%Y'),"Lifetime");
+insert into member values(4,"Nikita Kulkarni","Mumbai",now(),"Annual");
+insert into member values(5,"Amruta Lingayat","pune",'2018-12-08',"Lifetime");
+
+select * from member;
+
+insert into books values(101,"Let us C","Denis Ritchie",450,"System");
+insert into books values(102,"Oracle – Complete Ref","Loni",550,"Database");
+insert into books values(103,"Mastering SQL","Loni",250,"Database");
+insert into books values(104,"PL SQL-Ref","ScottUrman",750,"Database");
+
+select * from books;
+update books set cost=300 where book_no=103;
+
+drop table issue;
+create table issue(lib_issue_id int(10),book_no int(6),
+member_id int(6),issue_date date,return_date date,
+foreign key(member_id) references Member(member_id),
+foreign key(book_no) references books(book_no));
+
+insert into issue(lib_issue_id,book_no,member_id,issue_date) values(7001,101,1,str_to_date('10-Dec-06','%d-%M-%Y'));
+insert into issue(lib_issue_id,book_no,member_id,issue_date) values(7002,102,2,str_to_date('25-Dec-06','%d-%M-%Y'));
+insert into issue(lib_issue_id,book_no,member_id,issue_date) values(7003,104,1,str_to_date('15-Jan-06','%d-%M-%Y'));
+insert into issue(lib_issue_id,book_no,member_id,issue_date) values(7004,101,1,str_to_date('04-Jul-06','%d-%M-%Y'));
+insert into issue(lib_issue_id,book_no,member_id,issue_date) values(7005,104,2,str_to_date('15-Nov-06','%d-%M-%Y'));
+insert into issue(lib_issue_id,book_no,member_id,issue_date) values(7006,101,3,str_to_date('18-Feb-06','%d-%M-%Y'));
+
+select * from issue;
