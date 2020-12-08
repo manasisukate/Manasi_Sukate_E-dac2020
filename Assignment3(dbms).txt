@@ -1,0 +1,29 @@
+use assignment3;
+create table department(dept_id int,dept_name varchar(50) not null,primary key(dept_id));
+create table employee(emp_id int,emp_name varchar(50) not null,dept_id int,salary int(20),manager int,primary key(emp_id),
+foreign key(dept_id) references department(dept_id));
+
+insert into department values(1,"Finance");
+insert into department values(2,"Training");
+insert into department values(3,"Marketing");
+
+insert into employee values(1,"Arun",1,8000,4);
+insert into employee values(2,"Kiran",1,7000,1);
+insert into employee values(3,"Scott",1,3000,1);
+insert into employee values(4,"Max",2,9000,null);
+insert into employee values(5,"Jack",2,8000,4);
+insert into employee values(6,"King",null,6000,1);
+
+-- **********************order by***********************
+use book_schema;
+select * from authors order by aname;
+select * from publishers order by pname desc;
+
+-- **********************group by************************
+use assignment3;
+select *,sum(salary) from employee group by dept_id;
+select dept_id,sum(salary) from employee where salary>17000 group by dept_id; 
+
+-- **********************having************************
+select dept_id,sum(salary) from employee group by dept_id having sum(salary)>18000; 
+select dept_id,sum(salary) from employee group by dept_id having sum(salary)<20000; 
