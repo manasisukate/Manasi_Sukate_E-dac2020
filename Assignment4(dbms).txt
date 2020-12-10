@@ -1,0 +1,28 @@
+-- **********************joins************************
+select department.dept_name,employee.emp_name from department,employee where department.dept_id=employee.dept_id;
+select * from employee join department where employee.dept_id=department.dept_id;
+select dept_id,sum(salary) from employee group by dept_id;
+select department.dept_name,employee.emp_name from department left join employee on employee.dept_id=department.dept_id;
+select department.dept_name,employee.emp_name from department right join employee on employee.dept_id=department.dept_id;
+select department.dept_name, employee.emp_name from 
+department,employee where department.dept_id=employee.dept_id;
+
+-- ***************************union*********************************
+create table Emp1(emp_no int,emp_name varchar(20));
+create table Emp2(emp_no int,emp_name varchar(20));																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														
+insert into Emp1 values(1,'A');
+insert into Emp1 values(2,'B');
+insert into Emp1 values(3,'C');
+
+insert into Emp2 values(1,'A');
+insert into Emp2 values(2,'B');
+insert into Emp2 values(4,'D');
+insert into Emp2 values(5,'E');
+-- *******************************************************
+select * from emp1 join emp2 where emp1.emp_no=emp2.emp_no;
+-- ***********************************************************************************
+select emp_name from employee where salary=(select salary from employee where emp_name='Arun') and emp_name!='Arun';
+select emp_name from employee where dept_id=(select dept_id from employee where emp_name='jack') and emp_name!='jack';
+select emp_name from employee where salary=(select min(salary) from employee);
+update employee set salary=15000 where dept_id=(select dept_id from department where emp_name='Max') and emp_name!='jack';
+
