@@ -1,0 +1,101 @@
+use assignment4;
+Create table EMP ( EMPNO numeric(4) not null, ENAME varchar(30) not null, JOB varchar(10), MGR numeric(4), HIREDATE date, SAL numeric(7,2), DEPTNO numeric(2) ); 
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1000,  'Manish' , 'SALESMAN', 1003,  '2020-02-18', 600,  30) ;
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1001,  'Manoj' , 'SALESMAN', 1003,  '2018-02-18', 600,  30) ;
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1002 , 'Ashish', 'SALESMAN',1003 , '2013-02-18',  750,  30 );
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1004,  'Rekha', 'ANALYST', 1006 , '2001-02-18', 3000,  10);
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1005 , 'Sachin', 'ANALYST', 1006 ,  '2019-02-18', 3000, 10 );
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1006,  'Pooja',  'MANAGER'  ,     null    , '2000-02-18' ,6000, 10 );
+
+Create table dept (dno numeric(4) not null, dname varchar(10) not null,area varchar(30));
+Insert into dept(dno,dname,area) values(10,'Store','Mumbai');
+Insert into dept(dno,dname,area) values(20,'Purchase','Mumbai');
+Insert into dept(dno,dname,area) values(30,'Store', 'Delhi');
+Insert into dept(dno,dname,area) values(40,'Marketing','Pune');
+Insert into dept(dno,dname,area) values(50,'Finance','Delhi');
+Insert into dept(dno,dname,area) values(60,'Accounts','Mumbai');
+
+select * from emp;
+select * from dept;
+-- ****************************************************************************
+delimiter $
+create procedure proc_cal(in val1 int,in val2 int)
+begin
+select val1+val2 as Addition;
+select val1-val2 as Substract;
+select val1*val2 as Multiplication;
+select val1/val2 as division;
+end $
+
+call proc_cal(6,2)
+-- *************************************************************************
+delimiter $
+create procedure reverse(in str varchar(20))
+begin
+ select reverse(str);
+end $
+
+call reverse('Database')
+-- **********************************************************************
+-- Write a Procedure to display top 5 employee based on highest salary and display employee number, employee name and salary.
+delimiter #
+create procedure pro1(in param int)
+begin
+select empno,ename,sal from emp order by sal desc limit param;
+end #
+call pro1(5)
+
+-- **********************************************************************
+-- Write a Procedure to create table emp_test with e_id integer, e_name varchar(10), e_joining_date date as columns
+delimiter #
+create procedure pro2()
+begin
+create table emp_test(e_id int,e_name varchar(10),e_join_date date);
+end #
+call pro2()
+
+-- ***********************************************************************
+-- Write a Procedure to add a department row in the DEPT table with the following values for columns deptno value 60, Dname  value should be  ‘Education’, area value should be Pune. 
+delimiter #
+create procedure pro3()
+begin
+insert into dept(dno,dname,area) values(60,'Education','Pune');
+end #
+call pro3()
+-- **************************************************************************************************
+-- Write a program that declares an integer variable called num, assigns a value to it and print, the value of the variable itself, its square, and its cube.
+delimiter $
+create procedure pro4()
+begin
+declare num int default 5;
+declare sq int;
+declare cu int;
+set sq=num*num;
+set cu=num*num*num;
+select sq as square;
+select cu as cube;
+end $
+
+call pro4();
+-- ********************************************************************************
+-- Write a program that declares an integer variable assign a value to it and display it using OUT parameter.
+delimiter $
+create procedure pro5(out val int)
+begin
+declare num int default 6;
+select num into val ;
+end $
+call pro5(@res);
+select @res as num;
+-- ****************************************************************************************
+-- Write a program that demonstrates the usage of IN and OUT parameters.
+delimiter $
+create procedure pro6(in val1 int,in val2 int,out res int)
+begin
+declare sum int default 0;
+set sum=val1+val2;
+select sum into res;
+end $
+
+call pro6(10,50,@xx);
+select @xx as Addition;
