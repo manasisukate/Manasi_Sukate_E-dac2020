@@ -1,0 +1,156 @@
+use assignment8;
+-- Write a Procedure that displays names and salaries of all Analysts recorded in the “emp” table by making use of a cursor.
+create table emp(id int not null,name varchar(20),designation varchar(20),salary int);
+insert into emp values(101,"Manasi","Developer",30000);
+insert into emp values(102,"Namrata","Analyst",20000);
+insert into emp values(103,"Nikita","Tester",10000);
+insert into emp values(104,"Amruta","Analyst",15000);
+insert into emp values(105,"Priyanka","Manager",35000);
+insert into emp values(106,"Manali","Developer",22000);
+alter table emp add column last_name varchar(20);
+SET SQL_SAFE_UPDATES=0;
+update emp set last_name="Sukate" where id=101; 
+update emp set last_name="Sukate" where id=102; 
+update emp set last_name="Kulkarni" where id=103; 
+update emp set last_name="Lingayat" where id=104; 
+update emp set last_name="Nima" where id=105; 
+update emp set last_name="Khabile" where id=106; 
+insert into emp values(107,"Manish","Manager",25000,"Patil");
+insert into emp values(108,"Neha","Tester",8000,"Joshi");
+-- update emp set last_name="Sukate" where id=101	Error Code: 1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column.  To disable safe mode, toggle the option in Preferences -> SQL Editor and reconnect.	0.000 sec
+-- select * from emp;
+-- desc emp;
+delimiter //
+create procedure display(in desg varchar(20))
+begin
+
+declare emp_name varchar(20) default "";
+declare sal int default 0;
+declare finish int default 0;
+
+declare mysql_cursor cursor for select name,salary from emp where designation =desg;
+declare continue handler for not found set finish=1;
+
+open mysql_cursor;
+main : loop
+fetch mysql_cursor into emp_name,sal;
+
+	if finish=1 then
+    leave main;
+    end if;
+    
+    select emp_name,sal;
+
+end loop main;
+close mysql_cursor;
+end //
+
+call display("Analyst");
+
+-- *************************************************************************************************
+-- Write a Procedure to display top 5 employees based on highest salary and display employee number, employee name and salary using Cursor.
+delimiter //
+create procedure highest_sal()
+begin
+declare e_id int default 0;
+declare e_name varchar(20);
+declare e_salary int default 0;
+
+declare finish int default 0;
+
+declare mysql_cursor cursor for select id ,name,salary from emp order by salary desc limit 5;
+declare continue handler for not found set finish=1;
+
+
+open mysql_cursor;
+main : loop
+fetch mysql_cursor into e_id,e_name,e_salary;
+
+	if finish=1 then
+    leave main;
+    end if;
+    
+    select e_id, e_name, e_salary;
+
+end loop main;
+close mysql_cursor;
+end //
+
+call highest_sal();
+-- *****************************************************************************************************
+-- Write  a procedure to display the concatenated first_name and last_name from “emp” table using cursors handle the  errors with Exit handler
+delimiter //
+create procedure concat()
+begin 
+declare f_name varchar(20);
+declare finish int default 0;
+
+declare mysql_cursor cursor for select concat(name," ",last_name) from emp;
+declare exit handler for not found set finish=1;
+
+open mysql_cursor;
+main : loop
+fetch mysql_cursor into f_name;
+
+	if finish=1 then
+    leave main;
+    end if;
+    
+    select f_name;
+
+end loop main;
+close mysql_cursor;
+end//
+call concat();
+-- ************************************************************************************************
+
+-- Write a procedure which select all the data from employee table and display the data of employee where employee name is ‘Manish’ using cursors.
+delimiter $
+create procedure accept(in emp_name varchar(20))
+begin
+declare e_id int;
+declare e_name varchar(20);
+declare e_designation varchar(20);
+declare e_salary int;
+declare e_last varchar(20);
+declare finish int default 0;
+declare mysql_cursor cursor for select * from emp where name=emp_name;
+declare exit handler for not found set finish=1;
+
+open mysql_cursor;
+
+main : loop
+	fetch mysql_cursor into e_id ,e_name,e_designation,e_salary,e_last;
+
+	if finish=1 then
+    leave main;
+    end if;
+    
+    select e_id ,e_name,e_designation,e_salary,e_last;
+
+end loop main;
+close mysql_cursor;
+end $
+
+call accept('Manish');
+
+-- ********************************************************************************
+-- Write a procedure which delete the data from employee table if emp sal is less than 10000  using cursor and handler the  Sqlexception with continue handler
+delimiter $
+create procedure delete_emp()
+begin
+declare emp_id int default 0;
+declare finish int default 0;
+
+declare mysql_cursor cursor for select id from emp where salary<10000;
+declare continue handler for not found set finish=1;
+
+open mysql_cursor;
+repeat
+fetch mysql_cursor into emp_id;
+delete from emp where id=emp_id;
+until finish
+end repeat;
+close mysql_cursor;
+end $
+call delete_emp();
