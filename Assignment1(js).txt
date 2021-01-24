@@ -1,0 +1,112 @@
+function is_Integer(x)
+{
+if(isNaN(x)){
+
+console.log("It is not a Number");
+}
+else{
+console.log("It is  a Number");
+
+}
+
+}
+is_Integer(123);
+--------------------------------------------------------------------
+Q5
+var arr=[1,2,2,3,4,5];
+function add_all(arr)
+{ var sum=0;
+for(var i in arr)
+{
+sum=sum+arr[i];
+}
+return sum;
+}
+add_all(arr);
+---------------------------------------------------------
+Q6
+function convert(t)
+{
+f=((c/5)*9)+32
+return f;
+}
+convert(100)
+---------------------------------------------------------------
+Q7.Factorial
+function factorial(n)
+{ var fact=1;
+while(n>0) {
+
+fact=fact*n;
+n--; }
+return fact;
+
+ }
+factorial(5);
+------------------------------------------------------------
+Q8
+function amt(amount,coin)
+{
+  if(amount===0)
+    {
+      return [];
+    }
+  else
+    {
+      if(amount>=coin[0])
+        {
+          x=(amount-coin[0]);
+          return [coin[0]].concat(amt(x,coin));
+        }
+      else
+        {
+          coin.shift();
+          return amt(amount,coin);
+        }
+    }
+}
+coin=[25,10,5,2,1];
+amt(87,coin);
+--------------------------------------------
+Q1
+function Is_string(c)
+{
+if(typeof(c)=="string"){
+
+console.log("It is a string");
+}
+else{
+console.log("It is not a string");
+
+}
+
+}
+Is_string("123");
+-------------------------------------------------------------------------
+Q2.
+var ob={};
+ob.key1="Pink";
+ob.key2="Black";
+ob.key3="white";
+ob.key4="Yellow";
+ob.key5="Blue";
+function display(ob)
+{
+for(var i in ob)
+{
+console.log(i+ " "+ob[i]);
+}
+}
+display(ob);
+---------------------------------------------------------
+Q3
+ arr=["sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+//accessing element
+for(var i in arr)
+{
+console.log(i+" "+arr[i]);
+
+}
+//adding element in declare array
+arr[7]=123;
+---------------------------------------------s

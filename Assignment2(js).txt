@@ -1,0 +1,81 @@
+Q1.
+var add = (function () {
+  var counter = 0;
+  return function () {counter += 1; return counter;}
+})();
+
+add();
+1
+add();
+2
+add();
+3
+----------------------------------------------------------
+Q2.
+function reverse(st)
+{
+var arr = st.split("");
+var rev="";
+for(var i=arr.length-1;i>=0;i--)
+{
+rev=rev+arr[i];
+}
+console.log("Reverse of given string is: "+rev);
+}
+reverse("KOMAL");
+
+OR
+function reverse(st)
+{
+var arr = st.split("");
+
+console.log("Reverse of given string is: "+arr.reverse());
+}
+reverse("KOMAL");
+----------------------------------------------------------------------
+Q3.
+var radius=[{radius: 5}, {radius: 9},{radius: 2}];
+function Sort(){
+return radius.sort(function(a,b){return a.radius - b.radius});
+
+}
+Sort();
+---------------------------------------------------
+4)  Write a Javascript program to sort elements of an array using sorting algorithm
+
+var arr = [20,5,78,6,45];
+function sor_arr(arr)
+{
+    var temp=0;
+    var i,j;
+    for(i=0;i<arr.length-1;i++)
+    {
+        for(j=i+1;j<arr.length;j++)
+        {
+            if(arr[i]>arr[j])
+            {
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+    return arr;
+}
+sor_arr(arr);
+[5, 6, 20, 45, 78]
+---------------------------------------------------------------------
+Q5
+function Length(arr)
+{
+    var count=0;
+    for(var i in arr)
+    {
+        count++;
+    }
+    document.write("Length of array is: "+count);
+}
+var arr=[1,2,3,4,5]
+Length(arr);
+-------------------------------------------------
+

@@ -1,0 +1,194 @@
+-->1.What is a sparse array?
+An array in which most of the elements have the same value
+When the array has more occurrence of zero elements
+A sparse array is an array of data in which many elements have a value of zero. 
+This is in contrast to a dense array, where most of the elements have non-zero values or are “full” of numbers.
+---------------------------------------------------
+2.List of javascript keywords
+Following the list of javascript keyword
+goto, deleted,protected,delete,arguement,public,if,try,do,else,this,const,
+class*,return,id,Ctach,break,null,switch,private,case,default,void,false,
+interface,package,typeof,instanceof,implements,with,import
+-------------------------------------------
+3.Different operators in javascript?
+following are some operators in javascript
+==:checks the content: ===:checks data type as well as contents;
++:adds and concates; typeof:returns the data type of speecific variable
+=:assignment operator;%:gives remainder;
+++increment --decrement /division
++= shorthand operator,adds and asigns value
+-= substracts and assigns 
+Operator	Description
+==	equal to
+===	equal value and equal type
+!=	not equal
+!==	not equal value or not equal type
+>	greater than
+<	less than
+>=	greater than or equal to
+<=	less than or equal to
+?	ternary operator
+---------------------------------------------------------------
+3.1 Difference between == and === operators in javascript , illustrate with example
+== :- This checks containt only.
+=== :- This checks containt as well as type of variable only.
+var a=1;
+var b="1";
+console.log("OUTPU OF == OPERATOR IS "+(a==b));
+op:-OUTPU OF == OPERATOR IS true
+--------------------------
+var a=1;
+var b="1";
+console.log("OUTPU OF == OPERATOR IS "+(a===b));
+op:- OUTPU OF == OPERATOR IS false
+--------------------------------
+var a="2";
+var b="2";
+console.log("OUTPU OF == OPERATOR IS "+(a===b));
+op:-3 OUTPU OF == OPERATOR IS true
+---------------------------------------
+var a="2";
+var b=3;
+console.log("OUTPU OF == OPERATOR IS "+(a==b));
+op:-OUTPU OF == OPERATOR IS false
+-----------------------------------------------------
+
+4 With example illustrate typeof operator in JS.
+-->
+var a="abc";
+var b="";
+var c=2;
+var d="2"
+var e={};
+var f=[];
+console.log(typeof a);
+console.log(typeof b);
+console.log(typeof c);
+console.log(typeof d);
+console.log(typeof e);
+console.log(typeof f);
+string
+string
+number
+string
+object
+object
+--------------------------------------------------------
+5 With a suitable example explain for loop in javascript
+function mul(x)
+{
+for(var i=1;i<=10;i++)
+{
+console.log(x +" * "+ i + " = "+x*i);
+
+}
+
+
+}
+mul(2);
+op:-
+2 * 1 = 2
+2 * 2 = 4
+2 * 3 = 6
+2 * 4 = 8
+2 * 5 = 10
+2 * 6 = 12
+2 * 7 = 14
+2 * 8 = 16
+2 * 9 = 18
+
+----------------------------------------------------
+6 With suitable example explain date methods in javascript
+-->
+var d=new Date();
+console.log("getTime "+d.getTime());
+console.log("getFullYear "+d.getFullYear());
+console.log("getMonth "+d.getMonth());
+console.log("getDate "+d.getDate());
+console.log("getDay "+d.getDay());
+console.log("getHours "+d.getHours());
+console.log("getMinutes "+d.getMinutes());
+console.log("getSeconds "+d.getSeconds());
+console.log("getMilliseconds "+d.getMilliseconds());
+OP:-GetMethods
+getTime 1610283368837
+getFullYear 2021
+getMonth 0
+getDate 10
+getDay 0
+getHours 18
+getMinutes 26
+getSeconds 8
+ getMilliseconds 837
+ -----------------
+ var d=new Date();
+var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+console.log("Day as a name: "+days[d.getDay()]);
+VM1670:3 Day as a name: Sunday
+---------------------------
+write a suitable example to illustrate jquery
+<script src="jqueri.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("pre").css("color","blue")
+                $("pre").css("border","2px solid red")
+                $("pre").css("background","white")
+            })
+            $(document).ready(function(){
+                $("pre").click(function(){
+                $("pre").css("background","navy")
+                let a=$("pre").html()
+                console.log(a)
+                })
+            })
+            $(document).ready(function(){
+                $("#b1").mouseenter(function(){
+                $("#b1").css("color","black")
+                })
+            })
+            $(document).ready(function(){
+                $("#b1").mouseleave(function(){
+                $("#b1").css("color","")
+                })
+            })
+            $(document).ready(function(){
+                $("body").keypress(function(){
+                $("body").css("background-color","white")
+                })
+            })
+            $(document).ready(function(){
+                $("body").keyup(function(){
+                $("body").css("background-color","red")
+                })
+            })
+            // $(document).ready(function(){
+            //     $(window).scroll(function(){
+            //     alert("you scrolled")
+            //     })
+            // })
+        </script>
+----------------------------------------------------------------
+Get fname using javascript
+<!DOCTYPE html>
+<html>
+<body>
+
+First Name: <input name="fname" type="text" value="Michael"><br>
+First Name: <input name="fname" type="text" value="Doug">
+
+<p>Click the button to get the tag name of the first element in the document that has a name attribute with the value "fname".</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var x = document.getElementsByName("fname")[0].tagName;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+</body>
+</html>
+
